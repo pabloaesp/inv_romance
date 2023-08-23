@@ -6,7 +6,7 @@ var port = 3800;
 
 // Conexion DB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0..0.1/inv_romance', {useNewUrlParser:true, useUnifiedTopology: true})
+mongoose.connect('mongodb://127.0.0.1/inv_romance', {useNewUrlParser:true, useUnifiedTopology: true})
 .then(() => {
     console.log("DB Ok");
 

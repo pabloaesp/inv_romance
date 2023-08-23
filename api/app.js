@@ -1,19 +1,19 @@
 'use strict'
 
 const express = require('express');
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 var app = express();
 
 
 //cargar rutas
-// var user_routes = require('./routes/userRoutes');
+var user_routes = require('./routes/userRoutes');
 
 
 
 //middlewares
-// app.use(bodyParser.urlencoded({extended:false}));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 
 // configurar cabeceras http
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 
 
 //rutas
-// app.use('/api', user_routes);
+app.use('/api', user_routes);
 
 
 

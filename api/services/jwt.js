@@ -2,7 +2,7 @@
 
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var secret = 'Fras3_para_tok3n_registr0_c1nta';
+var secret = 'Fras3_para_tok3n_1nv-R0manc4';
 
 exports.createToken = function(user){
     var payload = {
@@ -10,8 +10,11 @@ exports.createToken = function(user){
         name: user.name,
         surname: user.surname,
         nick: user.nick,
+        dni: user.dni,
+        telephone: user.telephone,
         role: user.role,
         image: user.image,
+        state: user.state,
         iat: moment().unix(),
         exp: moment().add(30, 'days').unix
     };
