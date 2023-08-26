@@ -48,15 +48,16 @@ function registerUser(req, res){
                     }
 
                     // Guardando el usuario despues de encriptar la password
-                    user.save((err, userSaved) => {
-                        if(err) return res.status(500).send({message: 'Error al guarda el usuario'});
+                    user.save().then((userSaved) => {
+                        // if(err) return res.status(500).send({message: 'Error al guarda el usuario'});
 
                         if (userSaved) {
                             res.status(200).send({user: userSaved});
                         }else{
                             res.status(404).send({message: 'No se ha registrado el usuario'});
                         }
-                    });
+                    }).
+                    catch(err => console.log('Error al guardar el usuario', err));
                 });
             }
         })
@@ -74,8 +75,8 @@ function loginUser(req, res){
     var nick = params.nick;
     var password = params.password;
 
-    User.findOne({nick: nick}, (err, user) => {
-        if(err) return res.status(500).send({message: 'Error en la peticion'});
+    User.findOne({nick: nick}).then((user) => {
+        // if(err) return res.status(500).send({message: 'Error en la peticion'});
 
         if (user){
             bcrypt.compare(password, user.password, (err, checked) => {
@@ -98,7 +99,8 @@ function loginUser(req, res){
         }else{
             return res.status(404).send({message: 'Usuario o Contraseña incorrectos!'});
         }
-    });
+    }).
+    catch(err => console.log('Error en la peticion', err));
 }
 
 
