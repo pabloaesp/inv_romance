@@ -14,7 +14,7 @@ exports.createToken = function(user){
         telephone: user.telephone,
         role: user.role,
         image: user.image,
-        state: user.state,
+        status: user.status,
         iat: moment().unix(),
         exp: moment().add(30, 'days').unix
     };

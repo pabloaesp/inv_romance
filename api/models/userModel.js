@@ -12,7 +12,7 @@ var UserSchema = Schema({
     password: String,
     role: String,
     image: String,
-    state: Boolean
+    status: Boolean
 });
 
 module.exports = mongoose.model('User', UserSchema);

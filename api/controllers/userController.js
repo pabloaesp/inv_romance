@@ -27,7 +27,7 @@ function registerUser(req, res){
         user.password = params.password;
         user.role = 'ROLE_USER';
         user.image = null;
-        user.state = params.state;
+        user.status = params.status;
 
         // Query para comprobar si el usuario a registra ya no existe
         User.find({nick: user.nick.toLowerCase()}).then((users) => {

@@ -7,7 +7,7 @@ var ProductSchema = Schema({
     product_id: String,
     name: String,
     type: String,
-    state: Boolean
+    status: Boolean
 
 });
 

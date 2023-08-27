@@ -8,7 +8,7 @@ var app = express();
 
 //cargar rutas
 var user_routes = require('./routes/userRoutes');
-
+var product_routes = require('./routes/productRoutes');
 
 
 //middlewares
@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 
 //rutas
 app.use('/api', user_routes);
+app.use('/api', product_routes);
 
 
 
