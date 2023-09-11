@@ -1,6 +1,8 @@
 'use strict'
 
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate-v2');
+
 var Schema = mongoose.Schema;
 
 var ProductSchema = Schema({
@@ -8,7 +10,8 @@ var ProductSchema = Schema({
     name: String,
     type: String,
     status: Boolean
-
 });
+
+ProductSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Product', ProductSchema);

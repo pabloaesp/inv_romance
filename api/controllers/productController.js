@@ -1,7 +1,6 @@
 'use strict'
 
 // var moment = require('moment');
-var mongoosePaginate = require('mongoose-pagination');
 
 var Product = require('../models/productModel');
 
@@ -44,27 +43,33 @@ function ProductRegister(req, res){
 // CONSULTA PRODUCTOS
 function getProducts(req, res){
 
-    var itemsPerPage = 3;
     var page = 1;
 
     if(req.params.page){
         page = req.params.page;
     }
 
-    Product.find()
-        .sort({'status':'desc'})
-        .paginate(page, itemsPerPage)
-        .then((result) => {
-            var products = result.docs;
-            var total = result.total;
+    // OPCIONES PARA EL PAGINATE
+    const options = {
+        page: page,
+        limit: 3
+    };
 
-        console.log(products);
-        if(!products) return res.status(404).send({message: 'No hay productos disponibles'});
+    Product.paginate({}, options)
+        // .sort({'status':'desc'})
+        .then((result) => {
+            // var products = result.docs;
+            // var total = result.totalDocs;
+            // var limit = result.limit;
+
+        console.log(result);
+        if(!result) return res.status(404).send({message: 'No hay productos disponibles'});
 
         return res.status(200).send({
-            products,
-            total,
-            pages: Math.ceil(total/itemsPerPage)
+            products: result.docs,
+            currentPage: result.page,
+            total: result.totalDocs,
+            pages: result.totalPages 
         });
     }).
     catch(err => console.log('Error de peticion de productos!', err));
