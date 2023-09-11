@@ -75,8 +75,9 @@ function getProducts(req, res){
 
 function getProduct(req, res){
     var productId = req.params.id;
+    console.log(productId);
 
-    Product.findById(productId).then((product) => {
+    Product.find({productId: productId}).then((product) => {
         if(!product) return res.status(404).send({message: 'El producto no existe'});
 
         return res.status(200).send({product: product});
