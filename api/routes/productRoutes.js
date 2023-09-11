@@ -9,7 +9,8 @@ var md_auth = require('../middlewares/authenticated');
 
 // Rutas
 api.post('/product-register', md_auth.ensureAuth, ProductController.ProductRegister); //Registro
-api.get('/products/:page?', md_auth.ensureAuth, ProductController.getProducts); // Consulta
+api.get('/products/:page?', md_auth.ensureAuth, ProductController.getProducts); // Consulta varios
+api.get('/product/:id', md_auth.ensureAuth, ProductController.getProduct); // Consulta uno
 /*
 api.put('/product-update/:id', md_auth.ensureAuth, TapeController.tapeUpdate); // Edicion
 api.put('/product-status-update/:id', md_auth.ensureAuth, TapeController.tapeStatusUpdate); // Edicion estado producto

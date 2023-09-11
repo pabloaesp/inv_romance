@@ -52,17 +52,15 @@ function getProducts(req, res){
     // OPCIONES PARA EL PAGINATE
     const options = {
         page: page,
-        limit: 3
+        limit: 3,
+        sort: {status: 'desc'}
     };
 
-    Product.paginate({}, options)
-        // .sort({'status':'desc'})
-        .then((result) => {
+    Product.paginate({}, options).then((result) => {
             // var products = result.docs;
             // var total = result.totalDocs;
             // var limit = result.limit;
 
-        console.log(result);
         if(!result) return res.status(404).send({message: 'No hay productos disponibles'});
 
         return res.status(200).send({
@@ -75,9 +73,22 @@ function getProducts(req, res){
     catch(err => console.log('Error de peticion de productos!', err));
 }
 
+function getProduct(req, res){
+    var productId = req.params.id;
+
+    Product.findById(productId).then((product) => {
+        if(!product) return res.status(404).send({message: 'El producto no existe'});
+
+        return res.status(200).send({product: product});
+        
+    }).
+    catch(err => console.log('Error de peticion del producto!', err));
+}
+
 // FALTA LA CONSULTA DE PRODUCTO POR ID
 
 module.exports = {
     ProductRegister,
-    getProducts
+    getProducts,
+    getProduct
 }

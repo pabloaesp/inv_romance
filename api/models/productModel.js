@@ -6,7 +6,7 @@ var mongoosePaginate = require('mongoose-paginate-v2');
 var Schema = mongoose.Schema;
 
 var ProductSchema = Schema({
-    product_id: String,
+    productId: String,
     name: String,
     type: String,
     status: Boolean
