@@ -61,7 +61,7 @@ function getProducts(req, res){
             // var total = result.totalDocs;
             // var limit = result.limit;
 
-        if(!result) return res.status(404).send({message: 'No hay productos disponibles'});
+        if(!result.length) return res.status(404).send({message: 'No hay productos disponibles'});
 
         return res.status(200).send({
             products: result.docs,
@@ -75,10 +75,10 @@ function getProducts(req, res){
 
 function getProduct(req, res){
     var productId = req.params.id;
-    console.log(productId);
-
+    
     Product.find({productId: productId}).then((product) => {
-        if(!product) return res.status(404).send({message: 'El producto no existe'});
+        console.log(product);
+        if(!product.length) return res.status(404).send({message: 'El producto no existe'});
 
         return res.status(200).send({product: product});
         
@@ -86,10 +86,43 @@ function getProduct(req, res){
     catch(err => console.log('Error de peticion del producto!', err));
 }
 
-// FALTA LA CONSULTA DE PRODUCTO POR ID
+function productUpdate(req, res){
+    var productId = req.params.id;
+    var update = req.body;
+    
+    // Borro status porque maneja en otra funcion
+    delete update.status;
+    
+    Product.findOneAndUpdate({productId:productId}, update, {new:true}).then((productUpdated) => {
+        console.log(productUpdated);
+
+        if(!productUpdated) return res.status(404).send({message: 'El producto no existe.'});
+
+        return res.status(200).send({product: productUpdated});
+
+    }).
+    catch(err => console.log('Error de edicion del producto!', err));
+}
+
+function ProductStatusUpdate(req, res){
+    var productId = req.params.id;
+
+    var status = req.body.status;
+    
+    Product.findOneAndUpdate({productId:productId}, {status:status}, {new:true}).then((productStatusUpdated) => {
+        
+        if(!productStatusUpdated) return res.status(404).send({message: 'No se ha podido actualizar el status del producto'});
+        
+        return res.status(200).send({product: productStatusUpdated});
+
+    }).
+    catch(err => console.log('Error de edicion del status!', err));
+}
 
 module.exports = {
     ProductRegister,
     getProducts,
-    getProduct
+    getProduct,
+    productUpdate,
+    ProductStatusUpdate
 }

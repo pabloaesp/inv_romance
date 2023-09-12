@@ -11,10 +11,9 @@ var md_auth = require('../middlewares/authenticated');
 api.post('/product-register', md_auth.ensureAuth, ProductController.ProductRegister); //Registro
 api.get('/products/:page?', md_auth.ensureAuth, ProductController.getProducts); // Consulta varios
 api.get('/product/:id', md_auth.ensureAuth, ProductController.getProduct); // Consulta uno
-/*
-api.put('/product-update/:id', md_auth.ensureAuth, TapeController.tapeUpdate); // Edicion
-api.put('/product-status-update/:id', md_auth.ensureAuth, TapeController.tapeStatusUpdate); // Edicion estado producto
-api.delete('/delete-product/:id', md_auth.ensureAuth, TapeController.deleteTape); // Eliminar
+api.put('/product-update/:id', md_auth.ensureAuth, ProductController.productUpdate); // Edicion
+api.put('/product-status-update/:id', md_auth.ensureAuth, ProductController.ProductStatusUpdate); // Edicion estado producto
+/*api.delete('/delete-product/:id', md_auth.ensureAuth, TapeController.deleteTape); // Eliminar
 */
 
 module.exports = api;
