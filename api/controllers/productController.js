@@ -5,7 +5,7 @@
 var Product = require('../models/productModel');
 
 // REGISTRO PRODUCTOS
-function ProductRegister(req, res){
+function productRegister(req, res){
     var params = req.body;
     console.log(params);
     if (params.product_id != "" & params.name != "" & params.type != "" & params.status != ""){
@@ -148,7 +148,7 @@ function deleteProduct(req, res){
 }
 
 module.exports = {
-    ProductRegister,
+    productRegister,
     getProducts,
     getProduct,
     productUpdate,

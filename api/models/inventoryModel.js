@@ -4,16 +4,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var InventorySchema = Schema({
-    inventory_id: String,
-    products: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product'
-        }
-      ],
+    user: { type: Schema.ObjectId, ref: 'User' },
+    products: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Product'} ], // ARREGLO DE PROPDUCTOS
     note: String,
-    week: String,
-
+    week: String, // DATO COLOCADO POR DEFECTO CON MOMENT
+    date: String // DATO COLOCADO POR DEFECTO CON MOMENT
 
 });
 

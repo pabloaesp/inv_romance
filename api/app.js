@@ -4,11 +4,12 @@ const express = require('express');
 var bodyParser = require('body-parser');
 
 var app = express();
-
+    
 
 //cargar rutas
 var user_routes = require('./routes/userRoutes');
 var product_routes = require('./routes/productRoutes');
+var inventory_routes = require('./routes/inventoryRoutes');
 
 
 //middlewares
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 //rutas
 app.use('/api', user_routes);
 app.use('/api', product_routes);
+app.use('/api', inventory_routes);
 
 
 
