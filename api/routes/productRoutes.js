@@ -13,7 +13,7 @@ api.get('/products/:page?', md_auth.ensureAuth, ProductController.getProducts); 
 api.get('/product/:id', md_auth.ensureAuth, ProductController.getProduct); // Consulta uno
 api.put('/product-update/:id', md_auth.ensureAuth, ProductController.productUpdate); // Edicion
 api.put('/product-status-update/:id', md_auth.ensureAuth, ProductController.ProductStatusUpdate); // Edicion estado producto
-/*api.delete('/delete-product/:id', md_auth.ensureAuth, TapeController.deleteTape); // Eliminar
-*/
+api.delete('/delete-product/:id', md_auth.ensureAuth, ProductController.deleteProduct); // Eliminar
+
 
 module.exports = api;

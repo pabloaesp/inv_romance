@@ -40,7 +40,7 @@ function ProductRegister(req, res){
     }
 }
 
-// CONSULTA PRODUCTOS
+// CONSULTA PRODUCTOS VARIOS
 function getProducts(req, res){
 
     var page = 1;
@@ -73,6 +73,7 @@ function getProducts(req, res){
     catch(err => console.log('Error de peticion de productos!', err));
 }
 
+// CONSULTA UN SOLO PRODUCTO
 function getProduct(req, res){
     var productId = req.params.id;
     
@@ -86,6 +87,7 @@ function getProduct(req, res){
     catch(err => console.log('Error de peticion del producto!', err));
 }
 
+// EDITAR PRODUCTO
 function productUpdate(req, res){
     var productId = req.params.id;
     var update = req.body;
@@ -104,6 +106,7 @@ function productUpdate(req, res){
     catch(err => console.log('Error de edicion del producto!', err));
 }
 
+// EDITAR STATUS PRODUCTO
 function ProductStatusUpdate(req, res){
     var productId = req.params.id;
 
@@ -119,10 +122,36 @@ function ProductStatusUpdate(req, res){
     catch(err => console.log('Error de edicion del status!', err));
 }
 
+// BORRAR PRODUCTO
+function deleteProduct(req, res){
+    var productId = req.params.id;
+
+    Product.findOne({productId: productId}).then((product) => {
+        
+        if(product == null) return res.status(404).send({message: 'El producto no existe.'});
+
+        if(product){
+            Product.deleteOne({productId: productId}).then((productRemoved) => {
+                if (productRemoved) return res.status(200).send({message: 'Producto eliminado correctamente.'});        
+            }).
+            catch(err => {
+                console.log('1. Error al borrar el producto');
+                return res.status(500).send({message: '1. Error al borrar el producto'});
+            });
+        }
+    }).
+    catch(err => {
+        console.log('2. Error al borrar el producto');
+        return res.status(500).send({message: '2. Error al borrar el producto'});
+    });
+    
+}
+
 module.exports = {
     ProductRegister,
     getProducts,
     getProduct,
     productUpdate,
-    ProductStatusUpdate
+    ProductStatusUpdate,
+    deleteProduct
 }
