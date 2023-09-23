@@ -1,6 +1,6 @@
 'use strict'
 
-// var moment = require('moment');
+var moment = require('moment');
 
 var Inventory = require('../models/inventoryModel');
 
@@ -12,14 +12,14 @@ function inventoryRegister(req, res){
 
         var inventory = new Inventory();
 
-        inventory.name = params.name,
+        inventory.user = req.user.sub,
         inventory.products = params.products
         inventory.note = params.note,
         inventory.week = moment().isoWeek();
         inventory.date = moment().unix();
         
         inventory.save().then((inventoryStored) => {
-
+            console.log(inventoryStored);   
             if(inventoryStored){
                 res.status(200).send({inventory: inventoryStored});
             }else{

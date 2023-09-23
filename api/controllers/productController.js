@@ -16,9 +16,9 @@ function productRegister(req, res){
                 return res.status(200).send({message: 'El producto ya existe.'});
     
             }else{
-                var product = new Product();
+                var product = new Product();    
     
-                product.product_id = params.product_id,
+                product.productId = params.productId,
                 product.name = params.name,
                 product.type = params.type,
                 product.status = true
