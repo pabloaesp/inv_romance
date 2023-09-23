@@ -1,6 +1,8 @@
 'use strict'
 
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate-v2');
+
 var Schema = mongoose.Schema;
 
 var InventorySchema = Schema({
@@ -11,5 +13,7 @@ var InventorySchema = Schema({
     date: String // DATO COLOCADO POR DEFECTO CON MOMENT
 
 });
+
+InventorySchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Inventory', InventorySchema);

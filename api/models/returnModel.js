@@ -1,6 +1,8 @@
 'use strict'
 
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate-v2');
+
 var Schema = mongoose.Schema;
 
 var ReturnSchema = Schema({
@@ -16,5 +18,7 @@ var ReturnSchema = Schema({
 
 
 });
+
+ReturnSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Return', ReturnSchema);
