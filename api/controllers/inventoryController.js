@@ -36,7 +36,7 @@ function inventoryRegister(req, res){
     }
 }
 
-// CONSULTA PRODUCTOS VARIOS
+// CONSULTA INVENTARIOS
 function getInventories(req, res){
 
     var page = 1;
@@ -55,7 +55,6 @@ function getInventories(req, res){
 
     Inventory.paginate({}, options).then((result) => {
 
-        console.log(result);
         if(!result) return res.status(404).send({message: 'No hay inventarios disponibles'});
 
         return res.status(200).send({
@@ -69,11 +68,44 @@ function getInventories(req, res){
     catch(err => console.log('Error de peticion de inventarios!', err));
 }
 
+// CONSULTA UN SOLO INVENTARIO
+function getInventory(req, res){
+    var inventoryId = req.params.id;
+    
+    Inventory.findOne({_id: inventoryId}).then((inventory) => {
+        console.log(inventory);
+        if(!inventory) return res.status(404).send({message: 'El inventario no existe'});
 
+        return res.status(200).send({inventory: inventory});
+        
+    }).
+    catch(err => console.log('Error de peticion del inventario!', err));
+}
+
+// MODIFICAR INVENTARIO
+function tapeUpdate(req, res){
+    var tapeId = req.params.id;
+
+    var update = req.body;
+
+    // Borro los dos valores criticos porque uno no se edita y el otro se maneja en otra funcion
+    delete update.number;
+    delete update.status;
+    
+    Tape.findByIdAndUpdate(tapeId, update, {new:true}, (err, tapeUpdated) => {
+        if(err) res.status(500).send({message: 'Error en la peticion'});
+
+        if(!tapeUpdated) return res.status(404).send({message: 'No se ha podido actualizar la cinta.'});
+
+        return res.status(200).send({tape: tapeUpdated});
+
+    });
+}
 
 module.exports = {
     inventoryRegister,
     getInventories,
+    getInventory,
 
 
 }
