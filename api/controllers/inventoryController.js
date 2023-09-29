@@ -83,29 +83,34 @@ function getInventory(req, res){
 }
 
 // MODIFICAR INVENTARIO
-function tapeUpdate(req, res){
-    var tapeId = req.params.id;
+function inventarioUpdate(req, res){
+    var inventoryId = req.params.id;
+    console.log(inventoryId);
 
-    var update = req.body;
+    Inventory.findOne({_id: inventoryId}).then((inventory) => {
 
-    // Borro los dos valores criticos porque uno no se edita y el otro se maneja en otra funcion
-    delete update.number;
-    delete update.status;
+        if (!inventory) res.status(500).send({message: 'El inventario no existe'});
+        
+        var update = req.body;
+
+        Inventory.findByIdAndUpdate(inventory._id, update, {new:true}).then((inventoryUpdated) => {
+
+            return res.status(200).send({inventory: inventoryUpdated});
     
-    Tape.findByIdAndUpdate(tapeId, update, {new:true}, (err, tapeUpdated) => {
-        if(err) res.status(500).send({message: 'Error en la peticion'});
-
-        if(!tapeUpdated) return res.status(404).send({message: 'No se ha podido actualizar la cinta.'});
-
-        return res.status(200).send({tape: tapeUpdated});
-
-    });
+        }).
+        catch(err => console.log('No se pudo guardar la modificacion', err));
+    
+    }).
+    catch(err => console.log('Error en la peticion', err));
 }
+
+    
 
 module.exports = {
     inventoryRegister,
     getInventories,
     getInventory,
+    inventarioUpdate
 
 
 }
