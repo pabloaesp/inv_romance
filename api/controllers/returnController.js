@@ -2,27 +2,27 @@
 
 var moment = require('moment');
 
-var Inventory = require('../models/inventoryModel');
+var Return = require('../models/returnModel');
 
 // REGISTRO INVENTARIOS
-function inventoryRegister(req, res){
+function returnRegister(req, res){
     var params = req.body;
     console.log(params);
 
     if (params.products){
 
-        var inventory = new Inventory();
+        var refund = new refund();
 
-        inventory.user = req.user.sub,
-        inventory.products = params.products
-        inventory.note = params.note,
-        inventory.week = moment().isoWeek();
-        inventory.date = moment().unix();
+        refund.user = req.user.sub,
+        refund.products = params.products
+        refund.note = params.note,
+        refund.week = moment().isoWeek();
+        refund.date = moment().unix();
         
-        inventory.save().then((inventoryStored) => {
+        refund.save().then((inventoryStored) => {
             console.log(inventoryStored);   
             if(inventoryStored){
-                res.status(200).send({inventory: inventoryStored});
+                res.status(200).send({refund: inventoryStored});
             }else{
                 res.status(404).send({message: 'No se ha podido guardar el inventario'});
             }
@@ -38,7 +38,7 @@ function inventoryRegister(req, res){
 }
 
 // CONSULTA INVENTARIOS
-function getInventories(req, res){
+function getReturns(req, res){
 
     var page = 1;
 
@@ -70,7 +70,7 @@ function getInventories(req, res){
 }
 
 // CONSULTA UN SOLO INVENTARIO
-function getInventory(req, res){
+function getReturn(req, res){
     var inventoryId = req.params.id;
     
     Inventory.findOne({_id: inventoryId}).then((inventory) => {
@@ -84,7 +84,7 @@ function getInventory(req, res){
 }
 
 // MODIFICAR INVENTARIO
-function inventoryUpdate(req, res){
+function updateReturn(req, res){
     var inventoryId = req.params.id;
     console.log(inventoryId);
 
@@ -106,7 +106,7 @@ function inventoryUpdate(req, res){
 }
 
 
-function deleteInventory(req, res){
+function deleteReturn(req, res){
     var inventoryId = req.params.id;
 
     Inventory.findById({_id: inventoryId}).then((inventory) => {
@@ -130,11 +130,11 @@ function deleteInventory(req, res){
     
 
 module.exports = {
-    inventoryRegister,
-    getInventories,
-    getInventory,
-    inventoryUpdate,
-    deleteInventory
+    returnRegister,
+    getReturns,
+    getReturn,
+    updateReturn,
+    deleteReturn
 
 
 }

@@ -10,6 +10,7 @@ var app = express();
 var user_routes = require('./routes/userRoutes');
 var product_routes = require('./routes/productRoutes');
 var inventory_routes = require('./routes/inventoryRoutes');
+var return_routes = require('./routes/inventoryRoutes');
 
 
 //middlewares
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 app.use('/api', user_routes);
 app.use('/api', product_routes);
 app.use('/api', inventory_routes);
+app.use('/api', return_routes);
 
 
 

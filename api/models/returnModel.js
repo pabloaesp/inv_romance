@@ -6,16 +6,11 @@ var mongoosePaginate = require('mongoose-paginate-v2');
 var Schema = mongoose.Schema;
 
 var ReturnSchema = Schema({
-    return_id: String,
-    products: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product'
-        }
-      ],
+    user: { type: Schema.ObjectId, ref: 'User' },
+    products: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Product'} ], // ARREGLO DE PROPDUCTOS
     note: String,
-    week: String,
-
+    week: String, // DATO COLOCADO POR DEFECTO CON MOMENT
+    date: String // DATO COLOCADO POR DEFECTO CON MOMENT
 
 });
 
