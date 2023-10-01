@@ -12,8 +12,7 @@ api.post('/inventory-register', md_auth.ensureAuth, InventoryController.inventor
 api.get('/inventories/:page?', md_auth.ensureAuth, InventoryController.getInventories); // Consulta varios
 api.get('/inventory/:id', md_auth.ensureAuth, InventoryController.getInventory); // Consulta uno
 api.put('/inventory-update/:id', md_auth.ensureAuth, InventoryController.inventarioUpdate); // Edicion
-/*api.put('/product-status-update/:id', md_auth.ensureAuth, ProductController.ProductStatusUpdate); // Edicion estado producto
-api.delete('/delete-product/:id', md_auth.ensureAuth, ProductController.deleteProduct); // Eliminar*/
+api.delete('/inventory-delete/:id', md_auth.ensureAuth, InventoryController.deleteInventory); // Eliminar
 
 
 module.exports = api;

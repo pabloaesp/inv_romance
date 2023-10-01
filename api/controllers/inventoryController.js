@@ -7,6 +7,7 @@ var Inventory = require('../models/inventoryModel');
 // REGISTRO INVENTARIOS
 function inventoryRegister(req, res){
     var params = req.body;
+    console.log(params);
 
     if (params.products){
 
@@ -104,13 +105,36 @@ function inventarioUpdate(req, res){
     catch(err => console.log('Error en la peticion', err));
 }
 
+
+function deleteInventory(req, res){
+    var inventoryId = req.params.id;
+
+    Inventory.findById({_id: inventoryId}).then((inventory) => {
+
+        if(!inventory){
+            return res.status(404).send({message: 'El inventario no existe.'});
+
+        }else{
+            Inventory.deleteOne({'_id': inventoryId}).then((inventoryDeleted) => {
+        
+                if (inventoryDeleted) return res.status(200).send({message: 'Inventario del ' + inventory.date + ' eliminado correctamente.'});        
+            }).
+            catch(err => console.log('No se pudo eliminar el inventario', err));
+
+        }
+    }).
+    catch(err => console.log('Error en la peticion de borrado de inventario', err));
+
+}
+
     
 
 module.exports = {
     inventoryRegister,
     getInventories,
     getInventory,
-    inventarioUpdate
+    inventarioUpdate,
+    deleteInventory
 
 
 }
