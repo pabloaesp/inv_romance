@@ -5,7 +5,7 @@ var mongoosePaginate = require('mongoose-paginate-v2');
 
 var Schema = mongoose.Schema;
 
-var ReturnSchema = Schema({
+var RefundSchema = Schema({
     user: { type: Schema.ObjectId, ref: 'User' },
     products: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Product'} ], // ARREGLO DE PROPDUCTOS
     note: String,
@@ -14,6 +14,6 @@ var ReturnSchema = Schema({
 
 });
 
-ReturnSchema.plugin(mongoosePaginate);
+RefundSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('Return', ReturnSchema);
+module.exports = mongoose.model('Refund', RefundSchema);
