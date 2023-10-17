@@ -1,16 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params } from '@angular/router';
-// import { UserService } from "src/app/services/user.services";
-// import { JsonPipe } from "@angular/common";
+import { User } from "src/models/user";
+import { UserService } from "src/services/user.services";
 
 @Component({
     selector: 'login',
     templateUrl: './login.component.html',
-    // providers: [UserService]
+    providers: [UserService]
 })
 export class LoginComponent implements OnInit{
     public title: string;
-    // public user: User;
+    public user: User;
     public status: string;
     public identity: any;
     public token: any;
@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit{
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        // private _userService: UserService
+        private _userService: UserService
 
     ){
-        this.title = 'Identificate'
+        this.title = 'Login Component'
         this.status = 'null';
-        // this.user = new User("","","","","","ROLE_USER","");
+        this.user = new User("","","","","","","ROLE_USER","","");
     }
 
 
@@ -37,13 +37,13 @@ export class LoginComponent implements OnInit{
     }
 
 
-    /*onSubmit(){
+    onSubmit(){
         // Loguear al usuario y conseguir sus datos
         this._userService.login(this.user).subscribe(
             response => {
                 this.identity = response.user;
 
-                console.log(this.identity);
+                console.log(this.identity); //BORRAR
 
                 if(!this.identity || !this.identity._id){
                     this.status = 'error';
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit{
                     // Conseguir token
                     this.getToken();
 
-                    this._router.navigate(['/home']);
+                    // this._router.navigate(['/home']);
                 }
 
             },
@@ -68,10 +68,10 @@ export class LoginComponent implements OnInit{
                 }
             }
         );
-    }*/
+    }
 
 
-    /*getToken(){
+    getToken(){
         this._userService.login(this.user, 'true').subscribe(
             response => {
                 this.token = response.token;
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit{
                 }
             }
         );
-    }*/
+    }
 
 
 

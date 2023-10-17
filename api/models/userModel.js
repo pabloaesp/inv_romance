@@ -14,7 +14,7 @@ var UserSchema = Schema({
     password: String,
     role: String,
     image: String,
-    status: Boolean
+    status: String
 });
 
 UserSchema.plugin(mongoosePaginate);
