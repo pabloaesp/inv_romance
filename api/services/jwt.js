@@ -9,7 +9,7 @@ exports.createToken = function(user){
         sub: user._id,
         name: user.name,
         surname: user.surname,
-        nick: user.nick,
+        email: user.email,
         dni: user.dni,
         telephone: user.telephone,
         role: user.role,

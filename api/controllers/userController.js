@@ -17,11 +17,11 @@ function registerUser(req, res){
 
     console.log(params);
 
-    if(params.name && params.surname && params.nick && params.password){
+    if(params.name && params.surname && params.email && params.password){
 
         user.name = params.name;
         user.surname = params.surname;
-        user.nick = params.nick;
+        user.email = params.email;
         user.dni = params.dni;
         user.telephone = params.telephone;
         user.password = params.password;
@@ -30,10 +30,10 @@ function registerUser(req, res){
         user.status = params.status;
 
         // Query para comprobar si el usuario a registra ya no existe
-        User.find({nick: user.nick.toLowerCase()}).then((users) => {
+        User.find({email: user.email.toLowerCase()}).then((users) => {
             // if(err) return res.status(500).send({message: 'Error en la peticion de usuarios'});
 
-            // Compruebo que el nick/ID del usuario exista.
+            // Compruebo que el email/ID del usuario exista.
             if(users && users.length >= 1){
                 return res.status(200).send({message: 'El usuario que intenta registrar ya existe.'});
             
@@ -72,10 +72,10 @@ function registerUser(req, res){
 function loginUser(req, res){
     var params = req.body;
 
-    var nick = params.nick;
+    var email = params.email;
     var password = params.password;
 
-    User.findOne({nick: nick}).then((user) => {
+    User.findOne({email: email}).then((user) => {
         // if(err) return res.status(500).send({message: 'Error en la peticion'});
 
         if (user){

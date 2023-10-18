@@ -2,7 +2,7 @@ export class User {
     constructor(
         public name: string,
         public surname: string,
-        public nick: string,
+        public email: string,
         public dni: string, 
         public telephone: string,
         public password: string,

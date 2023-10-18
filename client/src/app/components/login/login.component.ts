@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit{
         private _router: Router,
         private _userService: UserService
 
+        
+
     ){
         this.title = 'Login Component'
         this.status = 'null';
@@ -30,10 +32,8 @@ export class LoginComponent implements OnInit{
     ngOnInit() {
         console.log('Componente de login cargado');
         
-        /*this.token = this._userService.gettoken();
-        if(this.token){
-            this._router.navigate(['/home']);
-        }*/
+        this.identity = JSON.parse(this._userService.getIdentity());
+
     }
 
 
@@ -42,8 +42,6 @@ export class LoginComponent implements OnInit{
         this._userService.login(this.user).subscribe(
             response => {
                 this.identity = response.user;
-
-                console.log(this.identity); //BORRAR
 
                 if(!this.identity || !this.identity._id){
                     this.status = 'error';

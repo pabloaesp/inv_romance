@@ -1,27 +1,27 @@
 <div class="home_container">
 
-    <div id="alert-login" class="alert alert-danger m-0" *ngIf="status == 'error'">
+    <div id="alert_login" class="alert alert-danger m-0" *ngIf="status == 'error'">
         <p class="m-0">Usuario y/o contraseña incorrectos.</p>
     </div>
 
     <!-- DIV LOGIN -->
-    <div class="login_container">
+    <div class="login_container" *ngIf="!identity">
         <div class="text_container">
             <h3>Login</h3>
         </div>
         <div class="login_container_2">
             <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-                <div class="mb-3">
-                    <label for="user_field" class="form-label">Usuario</label>
-                    <input type="email" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control"
+                <div id="div_user_field">
+                    <label for="user_field" class="form-label mb-1">Correo Electrónico</label>
+                    <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control"
                         id="user_field" required>
-                    <span *ngIf="!nick.valid && nick.touched">
+                    <span *ngIf="!email.valid && email.touched">
                         El correo es obligatorio.
                     </span>
                 </div>
 
-                <div class="mb-4">
-                    <label for="password_field" class="form-label">Contraseña</label>
+                <div id="div_password_field">
+                    <label for="password_field" class="form-label mb-1">Contraseña</label>
                     <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
                         class="form-control" id="password_field" required>
                     <span *ngIf="!password.valid && password.touched">
@@ -33,6 +33,18 @@
                     <input type="submit" id="button_login" value="Ingresar" class="btn" [disabled]="!loginForm.form.valid">
                 </div>
             </form>
+        </div>
+    </div>
+    
+    <!-- DIV BIENVENIDO -->
+    <div id="welcome_container" *ngIf="identity">
+        <div id="text_container2">
+            <h3>Bienvenida:</h3>
+        </div>
+        <div id="welcome_container2" class="">
+            <p id="p1" class="mb-1">{{ identity.name }}</p>
+            &nbsp;
+            <p id="p2">{{ identity.surname }}</p>
         </div>
     </div>
 
