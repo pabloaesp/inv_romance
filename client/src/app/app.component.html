@@ -7,9 +7,10 @@
     </div>
 </nav>
 
+
 <!-- NAV PARA LOGUEADO -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="identity">
-    <div class="d-flex flex-row justify-content-between w-100 px-2">
+    <div class="d-flex flex-row justify-content-between w-100">
 
         <!-- LOGO -->
         <div class="d-flex justify-content-start col-4">
@@ -26,16 +27,16 @@
         </div>
 
         <!-- MENU USUARIO -->
-        <div class="d-flex justify-content-end col-4">
+        <div class="d-flex justify-content-end p-0 col-4">
             <div class="btn-group">
-                <button id="nav_btn_user" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+                <button id="nav_btn_user" type="button" class="btn dropdown-toggle " 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{identity.name}} {{identity.surname}}
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Action</button>
-                    <button class="dropdown-item" type="button">Another action</button>
-                    <button class="dropdown-item" type="button">Something else here</button>
+                    <button class="dropdown-item" type="button">Editar perfil</button>
+                    <button class="dropdown-item" type="button">Noticias</button>
+                    <button class="dropdown-item" type="button" (click)="logout()">Cerrar sesión</button>
                 </div>
             </div>
         </div>
