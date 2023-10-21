@@ -31,9 +31,6 @@ export class LoginComponent implements OnInit{
 
     ngOnInit() {
         console.log('Componente de login cargado');
-        
-        this.identity = JSON.parse(this._userService.getIdentity());
-
     }
 
 
@@ -49,11 +46,12 @@ export class LoginComponent implements OnInit{
                 }else{
                     // Persistir datos del usuario
                     localStorage.setItem('identity', JSON.stringify(this.identity));
+                    this.status = 'pass';
 
                     // Conseguir token
                     this.getToken();
 
-                    // this._router.navigate(['/home']);
+                    this._router.navigate(['/home']);
                 }
 
             },

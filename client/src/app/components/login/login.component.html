@@ -1,11 +1,11 @@
-<div class="home_container">
+<div class="login_container">
 
     <div id="alert_login" class="alert alert-danger m-0" *ngIf="status == 'error'">
         <p class="m-0">Usuario y/o contraseña incorrectos.</p>
     </div>
 
     <!-- DIV LOGIN -->
-    <div class="login_container" *ngIf="!identity">
+    <div class="login_container">
         <div class="text_container">
             <h3>Login</h3>
         </div>
@@ -36,23 +36,6 @@
         </div>
     </div>
     
-    <!-- DIV BIENVENIDO -->
-    <div id="welcome_container" *ngIf="identity">
-        <div id="text_container2">
-            <h3>Bienvenida:</h3>
-        </div>
-        <div id="welcome_container2" class="">
-            <p id="p1" class="mb-1">{{ identity.name }}</p>
-            &nbsp;
-            <p id="p2">{{ identity.surname }}</p>
-        </div>
-    </div>
-
-    <!-- DIV NOTICIAS -->
-    <div class="news_container">
-        Noticias PASAR A UN COMPONENTE APARTE
-
-
-    </div>
+    
 
 </div>
